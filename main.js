@@ -27,11 +27,11 @@ window.onload = function(){
     	background.image = game.assets["background.png"];
     	game.rootScene.addChild(background);
     	
-    	var b1 = new Ball(new Vec2(0,20),10,null);
-        b1.speed = new Vec2(2,1);
+    	var b1 = new Ball(new Vec2(400,200),40,null);
+        b1.speed = new Vec2(1,1);
         
-        var b2 = new Ball(new Vec2(800,420),10,null);
-        b2.speed = new Vec2(-2,-1);
+        var b2 = new Ball(new Vec2(800,600),10,null);
+        b2.speed = new Vec2(-1,-0.9);
     };
     game.start();
 };

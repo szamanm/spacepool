@@ -2,7 +2,7 @@ var Ball = Class.create(Sprite, {
 	initialize : function(pos, r, owner) {
 		Sprite.call(this, r * 2, r * 2);
 
-		this.radius = r;
+		this.r = r;
 		this.owner = owner;
 		this.speed = Vec2(0, 0);
 		var surface = new Surface(2*r, 2*r);
@@ -18,10 +18,10 @@ var Ball = Class.create(Sprite, {
 		this.pos = pos;
 
         this.addEventListener("enterframe", function(){
-        	this.pos = this.pos.addV(this.speed);
         	var coliding = world.find(this);
         	if(coliding.length == 1)
-        	   alert('a');
+        	   var a;
+            this.pos = this.pos.addV(this.speed);
         });
         world.add(this);
 	},
