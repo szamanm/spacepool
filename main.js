@@ -30,8 +30,8 @@ window.onload = function(){
     	var b1 = new Ball(new Vec2(400,200),40,null);
         b1.speed = new Vec2(1,1);
         
-        var b2 = new Ball(new Vec2(800,600),10,null);
-        b2.speed = new Vec2(-1,-0.9);
+        var b2 = new Ball(new Vec2(800,600),40,null);
+        b2.speed = new Vec2(-1,-0.8);
     };
     game.start();
 };
