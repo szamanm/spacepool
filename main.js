@@ -18,7 +18,7 @@ Sprite.prototype.addToPosV = function(vec_) {
 
 
 window.onload = function(){
-    var game = new Core(960, 640);
+    var game = new Core(world.size.x, world.size.y);
     game.fps = 60;
     world.init(game);
     game.preload('background.png');
@@ -27,11 +27,11 @@ window.onload = function(){
     	background.image = game.assets["background.png"];
     	game.rootScene.addChild(background);
     	
-    	var b1 = new Ball(new Vec2(400,200),40,null);
-        var b2 = new Ball(new Vec2(800,600),40,{ballColor : "#FF3141"});
-        var b3 = new Ball(new Vec2(100,200),30,{ballColor : "#AA3F41"});
-        var b4 = new Ball(new Vec2(200,100),50,{ballColor : "#21A1F1"});
-        var b5 = new Ball(new Vec2(530,200),40,{ballColor : "#FFFF41"});
+    	var b1 = new Ball(new Vec2(world.size.x * 0.1,world.size.y * 0.1),40,null);
+        var b2 = new Ball(new Vec2(world.size.x * 0.3,world.size.y * 0.8),40,{ballColor : "#FF3141"});
+        var b3 = new Ball(new Vec2(world.size.x * 0.5,world.size.y * 0.1),30,{ballColor : "#AA3F41"});
+        var b4 = new Ball(new Vec2(world.size.x * 0.7,world.size.y * 0.8),50,{ballColor : "#21A1F1"});
+        var b5 = new Ball(new Vec2(world.size.x * 0.9,world.size.y * 0.5),40,{ballColor : "#FFFF41"});
     };
     game.start();
 };

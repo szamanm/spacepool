@@ -3,7 +3,7 @@ var world = (function(){
 		this.game = game;
 	};
 	this.game;
-	this.size = new Vec2(960,720);
+	this.size = new Vec2(window.innerWidth,window.innerHeight);
 	this.balls = [];
 	this.add = function(b){
 		this.balls.push(b);
