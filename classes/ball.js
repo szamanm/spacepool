@@ -76,9 +76,9 @@ var Ball = Class.create(Sprite, {
                     */
                     
                     a.colidedWith.push(this);
-                    this.speed = this.speed.mulS(0.98);
                 }
             }
+            this.speed = this.speed.mulS(0.98);
             this.colidedWith = [];
         });
         world.add(this);
