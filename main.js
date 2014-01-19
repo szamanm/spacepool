@@ -28,10 +28,6 @@ Sprite.prototype.__defineSetter__("pos",function(val){
 	this.y = val.y;
 });
 
-
-var world = {};
-
-
 window.onload = function(){
     var game = new Core(960, 640);
     game.fps = 60;
@@ -41,36 +37,13 @@ window.onload = function(){
     	background.image = game.assets["background.png"];
     	game.rootScene.addChild(background);
     	
-        var ball = new Sprite(50, 50);
-        var surface = new Surface(50, 50);
-        surface.context.beginPath();
-        surface.context.arc(25, 25, 25, 0, Math.PI*2, true);
-        surface.context.fillStyle = '#FFFF00';
-        surface.context.fill();
-        ball.image = surface;
+    	var b1 = new Ball(new Vec2(0,0),10,null);
+        b1.speed = new Vec2(2,1);
+        game.rootScene.addChild(b1);
         
-        ball.x = 0;
-        ball.y = 0;
-        
-        ball.speed = new Vec2(2,1);
-        
-        
-        
-        
-        //ball.frame = 5;
-        game.rootScene.addChild(ball);
-
-        ball.addEventListener("enterframe", function(){
-       	    
-        	//this.addToPosV(this.speed);
-        	this.pos = this.pos.addV(this.speed);
-        	        	
-            //this.frame = this.age % 2 + 6;
-        });
-
-        ball.addEventListener("touchstart", function(){
-            game.rootScene.removeChild(ball);
-        });
+        var b2 = new Ball(new Vec2(800,420),10,null);
+        b2.speed = new Vec2(-2,-1);
+        game.rootScene.addChild(b2);
     };
     game.start();
 };
