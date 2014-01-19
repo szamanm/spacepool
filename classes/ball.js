@@ -44,15 +44,23 @@ var Ball = Class.create(Sprite, {
         			var v = this.speed;
         			var va = a.speed;
         			
-        			var vn = n.mulS(n.dot(v));
-        			var vt = vn.subV(v);
+        			//var vn = n.mulS(n.dot(v));
+        			//var vt = vn.subV(v);
         			
-        			var van = n.mulS(n.dot(va));
-        			var vat = van.subV(va);
+        			//var van = n.mulS(n.dot(va));
+        			//var vat = van.subV(va);
         			
         			var m = this.r*this.r;
         			var ma = a.r*a.r;
         			
+        			var pen = c.subV(ca).length() - this.r - a.r;
+        			pen = Math.abs(pen);
+        			
+        			var j = n.mulS((m+ma)*pen*0.05);
+        			this.speed = this.speed.subV(j.divS(m*1.2));
+        			a.speed = a.speed.addV(j.divS(ma*1.2));
+        			
+        			/*
         			var nvn = vn.mulS(m-ma).addV(van.mulS(2*ma));
         			nvn = nvn.divS(m+ma);
         			
@@ -64,6 +72,8 @@ var Ball = Class.create(Sprite, {
         			
         			a.speed = vat.subV(nvan);
         			a.pos = a.pos.addV(a.speed.mulS(2));
+        			*/
+        			
         			a.colidedWith.push(this);
         		}
         	}
