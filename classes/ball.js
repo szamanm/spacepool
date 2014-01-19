@@ -19,8 +19,11 @@ var Ball = Class.create(Sprite, {
 
         this.addEventListener("enterframe", function(){
         	this.pos = this.pos.addV(this.speed);
+        	var coliding = world.find(this);
+        	if(coliding.length == 1)
+        	   alert('a');
         });
-
+        world.add(this);
 	},
 	r : 0,
 	m : 0,
