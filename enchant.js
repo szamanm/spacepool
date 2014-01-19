@@ -1745,7 +1745,11 @@ enchant.Node = enchant.Class.create(enchant.EventTarget, {
 
         this._matrix = [ 1, 0, 0, 1, 0, 0 ];
 
-        this.pos = new Vec2(0,0);
+        this._x = 0;
+        this._y = 0;
+        
+        this._pos = new Vec2(0,0);
+        
         this._offsetX = 0;
         this._offsetY = 0;
 
@@ -1794,8 +1798,8 @@ enchant.Node = enchant.Class.create(enchant.EventTarget, {
      * @param {Number} y Target y coordinates.
      */
     moveTo: function(x, y) {
-        this.pos.x = x;
-        this.pos.y = y;
+        this._x = x;
+        this._y = y;
         this._dirty = true;
     },
     /**
@@ -1804,8 +1808,8 @@ enchant.Node = enchant.Class.create(enchant.EventTarget, {
      * @param {Number} y y axis movement distance.
      */
     moveBy: function(x, y) {
-        this.pos.x += x;
-        this.pos.y += y;
+        this._x += x;
+        this._y += y;
         this._dirty = true;
     },
     /**
@@ -1814,10 +1818,10 @@ enchant.Node = enchant.Class.create(enchant.EventTarget, {
      */
     x: {
         get: function() {
-            return this.pos.x;
+            return this._x;
         },
         set: function(x) {
-            this.pos.x = x;
+            this._x = x;
             this._dirty = true;
         }
     },
@@ -1827,11 +1831,23 @@ enchant.Node = enchant.Class.create(enchant.EventTarget, {
      */
     y: {
         get: function() {
-            return this.pos.y;
+            return this._y;
         },
         set: function(y) {
-            this.pos.y = y;
+            this._y = y;
             this._dirty = true;
+        }
+    },
+    pos: {
+    	get: function() {
+    		this._pos.x = this._x;
+    		this._pos.y = this._y;
+    		return this._pos;
+    	},
+        set: function(v) {
+        	this._x = v.x;
+        	this._y = v.y;
+        	this._dirty = true;
         }
     },
     _updateCoordinate: function() {
@@ -3386,8 +3402,8 @@ enchant.Matrix = enchant.Class.create({
         this.stack.push([ 1, 0, 0, 1, 0, 0 ]);
     },
     makeTransformMatrix: function(node, dest) {
-        var x = node.x;
-        var y = node.y;
+        var x = node._x;
+        var y = node._y;
         var width = node.width || 0;
         var height = node.height || 0;
         var rotation = node._rotation || 0;
@@ -4295,28 +4311,28 @@ enchant.Scene = enchant.Class.create(enchant.Group, {
         };
 
         this.addEventListener(enchant.Event.CORE_RESIZE, this._oncoreresize);
-        this.pos = new Vec2(0,0);
+
         this._oncoreresize(core);
     },
     x: {
         get: function() {
-            return this.pos.x;
+            return this._x;
         },
         set: function(x) {
-            this.pos.x = x;
+            this._x = x;
             for (var type in this._layers) {
-                this._layers[type].pos.x = x;
+                this._layers[type].x = x;
             }
         }
     },
     y: {
         get: function() {
-            return this.pos.y;
+            return this._y;
         },
         set: function(y) {
-            this.pos.y = y;
+            this._y = y;
             for (var type in this._layers) {
-                this._layers[type].pos.y = y;
+                this._layers[type].y = y;
             }
         }
     },

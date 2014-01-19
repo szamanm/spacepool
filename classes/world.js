@@ -16,6 +16,7 @@ var world = (function(){
 		        
 			if(b.pos.subV(this.balls[i].pos).lengthSqr() < Math.sqrt(b.r + this.balls[i].r)){
 				retAr.push(this.balls[i]);
+				alert('a');
 			}
 		};
 		return retAr;
