@@ -12,10 +12,22 @@ Sprite.prototype.setPosV = function(vec_) {
 };
 
 Sprite.prototype.addToPosV = function(vec_) {
-	console.log(vec_);
 	this.x += vec_.x;
 	this.y += vec_.y;
 };
+
+Sprite.prototype.posVec = new Vec2(0,0);
+Sprite.prototype.__defineGetter__("pos",function(){
+	this.posVec.x = this.x;
+	this.posVec.y = this.y;
+	return this.posVec;
+});
+
+Sprite.prototype.__defineSetter__("pos",function(val){
+	this.x = val.x;
+	this.y = val.y;
+});
+
 
 var world = {};
 
@@ -30,7 +42,6 @@ window.onload = function(){
     	game.rootScene.addChild(background);
     	
         var ball = new Sprite(50, 50);
-        //ball.image = game.assets["chara1.png"];
         var surface = new Surface(50, 50);
         surface.context.beginPath();
         surface.context.arc(25, 25, 25, 0, Math.PI*2, true);
@@ -50,13 +61,10 @@ window.onload = function(){
         game.rootScene.addChild(ball);
 
         ball.addEventListener("enterframe", function(){
-            //this.x += 1;
-        	//this.x += this.speed.x;
-        	//this.y += this.speed.y;
-        	this.addToPosV(this.speed);
-        	
-        	
-        	
+       	    
+        	//this.addToPosV(this.speed);
+        	this.pos = this.pos.addV(this.speed);
+        	        	
             //this.frame = this.age % 2 + 6;
         });
 
