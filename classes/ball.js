@@ -1,4 +1,3 @@
-
 var TOUCH_INFLUENCE_FACTOR = 0.3;
 var TOUCH_MOVE_FADER = 0.7;
 
@@ -9,6 +8,7 @@ var Ball = Class.create(Sprite, {
 		this.r = r;
 		this.owner = owner;
 		this.speed = new Vec2(0, 0);
+		this.colidedWith = [];
 		var surface = new Surface(2*r, 2*r);
 		surface.context.beginPath();
 		surface.context.arc(r, r, r, 0, Math.PI * 2);
@@ -55,9 +55,12 @@ var Ball = Class.create(Sprite, {
                     var ma = a.r*a.r;
                     
                     var pen = c.subV(ca).length() - this.r - a.r;
-                    pen = Math.abs(pen);
+                    //pen = pen*pen; //Math.abs(pen);
+                    //pen = Math.abs(pen);
+                    //pen = 10 + Math.pow(pen, 1.9);
+                    pen = 15 + pen*pen;
                     
-                    var j = n.mulS((m+ma)*pen*0.05);
+                    var j = n.mulS((m+ma)*pen*0.0005);
                     this.speed = this.speed.subV(j.divS(m*1.2));
                     a.speed = a.speed.addV(j.divS(ma*1.2));
                     
@@ -78,7 +81,8 @@ var Ball = Class.create(Sprite, {
                     a.colidedWith.push(this);
                 }
             }
-            this.speed = this.speed.mulS(0.98);
+
+            this.speed = this.speed.mulS(this.speed.lengthSqr() > this.r ? 0.8 : 0.999999);
             this.colidedWith = [];
         });
         world.add(this);
@@ -99,6 +103,6 @@ var Ball = Class.create(Sprite, {
 	futureSpeed : new Vec2(0,0),
 	movePrev : new Vec2(0,0),
 	r : 0,
-	m : 0,
+	collidedWith : [],
 	owner : null
 });
