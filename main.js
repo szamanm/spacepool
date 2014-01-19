@@ -30,8 +30,11 @@ window.onload = function(){
     	var b1 = new Ball(new Vec2(400,200),40,null);
         b1.speed = new Vec2(1,1);
         
-        var b2 = new Ball(new Vec2(800,600),10,null);
-        b2.speed = new Vec2(-1,-0.9);
+        var b2 = new Ball(new Vec2(800,600),40,{ballColor : "#FF3141"});
+        b2.speed = new Vec2(-1,-0.8);
+        var b3 = new Ball(new Vec2(100,200),30,{ballColor : "#AA3F41"});
+        var b4 = new Ball(new Vec2(200,100),50,{ballColor : "#21A1F1"});
+        var b5 = new Ball(new Vec2(53000,200),40,{ballColor : "#FFFF41"});
     };
     game.start();
 };
