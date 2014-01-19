@@ -28,6 +28,7 @@ var Ball = Class.create(Sprite, {
         	   var a;
             this.pos = this.pos.addV(this.speed);
             world.keepInBounds(this);
+            this.speed = this.speed.mulS(0.98);
         });
         world.add(this);
         
