@@ -3,6 +3,7 @@ var world = (function(){
 		this.game = game;
 	};
 	this.game;
+	this.size = new Vec2(960,720);
 	this.balls = [];
 	this.add = function(b){
 		this.balls.push(b);
@@ -20,6 +21,16 @@ var world = (function(){
 			}
 		};
 		return retAr;
+	};
+	this.keepInBounds = function(b){
+	   if(b.pos.x + (2*b.r) > this.size.x)
+           b.pos = b.pos.subV(new Vec2(this.size.x + (b.r*2),0));
+       if(b.pos.y + (2*b.r) > this.size.y)
+           b.pos = b.pos.subV(new Vec2(0,this.size.y + (b.r*2)));
+       if(b.pos.x + (2*b.r) < 0)
+           b.pos = b.pos.addV(new Vec2(this.size.x + (b.r*2),0));
+       if(b.pos.y + (2*b.r) < 0)
+           b.pos = b.pos.addV(new Vec2(0,this.size.y + (b.r*2)));
 	};
 	return this;
 })();

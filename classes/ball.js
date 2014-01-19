@@ -27,6 +27,7 @@ var Ball = Class.create(Sprite, {
         	if(coliding.length == 1)
         	   var a;
             this.pos = this.pos.addV(this.speed);
+            world.keepInBounds(this);
         });
         world.add(this);
         

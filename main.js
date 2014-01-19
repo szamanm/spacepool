@@ -23,7 +23,7 @@ window.onload = function(){
     world.init(game);
     game.preload('background.png');
     game.onload = function(){
-    	var background = new Sprite(960,640);
+    	var background = new Sprite(world.size.x,world.size.y);
     	background.image = game.assets["background.png"];
     	game.rootScene.addChild(background);
     	
