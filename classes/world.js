@@ -22,6 +22,19 @@ var world = (function(){
 		};
 		return retAr;
 	};
+	
+	this.findp = function(p, r){
+		var retAr = [];
+		for(var i = 0; i<this.balls.length; i++){
+		    var c1 = p;
+		    var c2 = this.balls[i].pos.addS(this.balls[i].r);
+			if(c1.subV(c2).lengthSqr() < (r + this.balls[i].r) *(r + this.balls[i].r)){
+				retAr.push(this.balls[i]);
+			}
+		};
+		return retAr;
+	};
+	
 	this.keepInBounds = function(b){
 	   if(b.pos.x + (2*b.r) > this.size.x)
            b.pos = b.pos.subV(new Vec2(this.size.x + (b.r*2),0));

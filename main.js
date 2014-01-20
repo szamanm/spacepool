@@ -26,6 +26,39 @@ window.onload = function(){
     	var background = new Sprite(world.size.x,world.size.y);
     	background.image = game.assets["background.png"];
     	game.rootScene.addChild(background);
+    
+    	background.blacks = [];
+    	
+    	background.adb = function(e){
+    	    this.blacks.push(e); 
+    	},
+    	background.tm = function(e){
+    	    this.blacks[0] =e; 
+    	},
+        background.rmb = function(e){
+            this.blacks = [];
+        },
+        background.addEventListener("enterframe", function(){
+            //this.x += 0.1;
+            //this.y += 0.1;
+            
+            
+            for(var i=0; i<this.blacks.length; ++i) {
+            	
+               var c = new Vec2(this.blacks[i].x, this.blacks[i].y)
+               var affected = world.findp(c, 320);
+               for(var j=0; j<affected.length; ++j) {
+            	   var to = c.subV(affected[j].pos.addS(affected[j].r));
+            	   var tol = to.length();
+            	   affected[j].speed = affected[j].speed.addV(to.mulS(3/(50+tol) )); 
+               }
+            }
+        });
+    	
+    	background.addEventListener('touchstart', background.adb);
+        background.addEventListener('touchend', background.rmb);
+        background.addEventListener('touchmove', background.tm);
+		
     	
     	var b1 = new Ball(new Vec2(world.size.x * 0.1,world.size.y * 0.1),40,null);
         var b2 = new Ball(new Vec2(world.size.x * 0.3,world.size.y * 0.8),40,{ballColor : "#FF3141"});
