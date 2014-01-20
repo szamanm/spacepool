@@ -30,7 +30,7 @@ window.onload = function(){
     	background.blacks = [];
     	
     	background.adb = function(e){
-    	    this.blacks.push(e); 
+    		this.blacks[0] =e; 
     	},
     	background.tm = function(e){
     	    this.blacks[0] =e; 
@@ -46,11 +46,11 @@ window.onload = function(){
             for(var i=0; i<this.blacks.length; ++i) {
             	
                var c = new Vec2(this.blacks[i].x, this.blacks[i].y)
-               var affected = world.findp(c, 320);
+               var affected = world.findp(c, 460);
                for(var j=0; j<affected.length; ++j) {
             	   var to = c.subV(affected[j].pos.addS(affected[j].r));
             	   var tol = to.length();
-            	   affected[j].speed = affected[j].speed.addV(to.mulS(3/(50+tol) )); 
+            	   affected[j].speed = affected[j].speed.addV(to.mulS(50/(30+to.lengthSqr()) )); 
                }
             }
         });
@@ -61,9 +61,9 @@ window.onload = function(){
 		
     	
     	var b1 = new Ball(new Vec2(world.size.x * 0.1,world.size.y * 0.1),40,null);
-        var b2 = new Ball(new Vec2(world.size.x * 0.3,world.size.y * 0.8),40,{ballColor : "#FF3141"});
-        var b3 = new Ball(new Vec2(world.size.x * 0.5,world.size.y * 0.1),30,{ballColor : "#AA3F41"});
-        var b4 = new Ball(new Vec2(world.size.x * 0.7,world.size.y * 0.8),50,{ballColor : "#21A1F1"});
+        //var b2 = new Ball(new Vec2(world.size.x * 0.3,world.size.y * 0.8),40,{ballColor : "#FF3141"});
+        //var b3 = new Ball(new Vec2(world.size.x * 0.5,world.size.y * 0.1),30,{ballColor : "#AA3F41"});
+        //var b4 = new Ball(new Vec2(world.size.x * 0.7,world.size.y * 0.8),50,{ballColor : "#21A1F1"});
         var b5 = new Ball(new Vec2(world.size.x * 0.9,world.size.y * 0.5),40,{ballColor : "#FFFF41"});
     };
     game.start();
